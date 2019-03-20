@@ -4,7 +4,7 @@ php:
     - 7.1
 
 env:
-  - .env
+  - DATABASE_HOST=127.0.0.1 DATABASE_NAME=myapp_test DATABASE_USER=travis DATABASE_PASSWORD="" TRAVIS_PULL_REQUEST=true
 
 services:
   - mysql
