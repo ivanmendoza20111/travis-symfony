@@ -1,8 +1,8 @@
 language: php
 sudo: false
 php:
-    - 7.2
-
+    - 7.1
+    
 env:
   - DB=mysql SH=bash PACKAGE_VERSION="1.0.*"
 
@@ -24,3 +24,8 @@ script:
 notifications:
   slack:
     on_success: always
+    on_failure: change
+    rooms:
+      secure: generated-secret
+  email:
+    - imendoza@syneteksolutions.com
