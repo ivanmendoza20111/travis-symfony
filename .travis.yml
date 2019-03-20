@@ -18,5 +18,9 @@ install:
   - composer update $COMPOSER_FLAGS
 
 script:
-  - php bin/console doctrine:schema:update -f
+  #- php bin/console doctrine:schema:update -f
   - phpunit
+
+notifications:
+  slack:
+    on_success: always
