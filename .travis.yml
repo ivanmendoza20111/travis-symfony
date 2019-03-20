@@ -1,8 +1,16 @@
 language: php
-sudo: false
+# sudo: false
 php:
     - 7.1
-    
+
+notifications:
+  email: ivanmendoza2011@hotmail.com
+  # slack:
+  #   on_success: always
+  #   on_failure: change
+  #   rooms:
+  #     secure: generated-secret
+
 env:
   - DATABASE_HOST=127.0.0.1 DATABASE_NAME=myapp_test DATABASE_USER=travis DATABASE_PASSWORD="" TRAVIS_PULL_REQUEST=true
 
@@ -15,17 +23,10 @@ before_install:
   - if [ "$SYMFONY_VERSION" != "" ]; then composer --no-update require symfony/symfony:${SYMFONY_VERSION}; fi;
 
 install: 
-  - composer install #update $COMPOSER_FLAGS
+  - composer install
 
 script:
+  - php bin/console doctrine:schema:update --dump-sql
   - php bin/console doctrine:schema:update -f
   - phpunit
-
-notifications:
-  email:
-      - ivanmendoza2011@hotmail.com
-  # slack:
-  #   on_success: always
-  #   on_failure: change
-  #   rooms:
-  #     secure: generated-secret
+  - exit
