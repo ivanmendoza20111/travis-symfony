@@ -6,7 +6,8 @@ php:
   - nightly
 
 install:
+  - phpunit
   - composer install --dev
 
 script: 
-  - ./vendor/bin/phpunit
+  - phpunit
