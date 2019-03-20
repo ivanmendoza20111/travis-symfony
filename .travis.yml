@@ -3,14 +3,6 @@ language: php
 php:
     - 7.1
 
-notifications:
-  email: ivanmendoza2011@hotmail.com
-  # slack:
-  #   on_success: always
-  #   on_failure: change
-  #   rooms:
-  #     secure: generated-secret
-
 env:
   - DATABASE_HOST=127.0.0.1 DATABASE_NAME=myapp_test DATABASE_USER=travis DATABASE_PASSWORD="" TRAVIS_PULL_REQUEST=true
 
@@ -29,4 +21,12 @@ script:
   - php bin/console doctrine:schema:update --dump-sql
   - php bin/console doctrine:schema:update -f
   - phpunit
-  - pwd
+  - mysql -u travis
+
+notifications:
+  email: ivanmendoza2011@hotmail.com
+  # slack:
+  #   on_success: always
+  #   on_failure: change
+  #   rooms:
+  #     secure: generated-secret
