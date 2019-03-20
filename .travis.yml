@@ -2,7 +2,15 @@ language: php
 sudo: false
 php:
     - 7.0
-    
+
+env:
+  - DB=mysql
+  - SH=bash
+  - PACKAGE_VERSION="1.0.*"
+
+services:
+  - mysql
+
 before_install:
     - composer self-update
     - if [ "$DEPENDENCIES" == "dev" ]; then perl -pi -e 's/^}$/,"minimum-stability":"dev"}/' composer.json; fi;
