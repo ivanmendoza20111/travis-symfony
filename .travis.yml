@@ -4,7 +4,7 @@ php:
     - 7.1
     
 env:
-  - DB=mysql SH=bash PACKAGE_VERSION="1.0.*"
+  - DATABASE_HOST=mysql DATABASE_NAME=test DATABASE_USER=root DATABASE_PASSWORD= TRAVIS_PULL_REQUEST=true
 
 services:
   - mysql
@@ -15,17 +15,17 @@ before_install:
   - if [ "$SYMFONY_VERSION" != "" ]; then composer --no-update require symfony/symfony:${SYMFONY_VERSION}; fi;
 
 install: 
-  - composer update $COMPOSER_FLAGS
+  - composer install #update $COMPOSER_FLAGS
 
 script:
   #- php bin/console doctrine:schema:update -f
   - phpunit
 
 notifications:
-  slack:
-    on_success: always
-    on_failure: change
-    rooms:
-      secure: generated-secret
   email:
-    - imendoza@syneteksolutions.com
+      - ivanmendoza2011@hotmail.com
+  # slack:
+  #   on_success: always
+  #   on_failure: change
+  #   rooms:
+  #     secure: generated-secret
