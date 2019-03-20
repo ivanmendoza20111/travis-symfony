@@ -29,4 +29,4 @@ script:
   - php bin/console doctrine:schema:update --dump-sql
   - php bin/console doctrine:schema:update -f
   - phpunit
-  - exit
+  - pwd
