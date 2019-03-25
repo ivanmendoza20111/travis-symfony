@@ -4,10 +4,12 @@ php:
     - 7.1
 
 env:
-  - DATABASE_HOST=127.0.0.1 DATABASE_NAME=myapp_test DATABASE_USER=travis DATABASE_PASSWORD="" TRAVIS_PULL_REQUEST=true
+  - DATABASE_HOST=127.0.0.1 DATABASE_NAME=myapp_test DATABASE_USER=travis DATABASE_PASSWORD=""
 
 services:
   - mysql
+
+sudo: required
 
 before_install:
   - composer self-update
@@ -15,9 +17,11 @@ before_install:
   # - if [ "$SYMFONY_VERSION" != "" ]; then composer --no-update require symfony/symfony:${SYMFONY_VERSION}; fi;
 
 install: 
+  - travis_retry 
   - composer install
 
 script:
+  - mysql -e 'create database myapp_test;'
   - php bin/console doctrine:schema:update --dump-sql
   - php bin/console doctrine:schema:update -f
   - phpunit
